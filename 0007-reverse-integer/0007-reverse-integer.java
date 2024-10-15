@@ -1,19 +1,21 @@
 class Solution {
     public int reverse(int x) {
-        long finalNum = 0;
+        int neww = 0;
+        
         while(x!=0){
-            int lastDig = x%10;
-            finalNum += lastDig;
-            finalNum = finalNum*10;
-            x= x/10;
+            int rem = x%10;
+            x = x/10;
+            
+             if (neww > Integer.MAX_VALUE / 10 || (neww == Integer.MAX_VALUE / 10 && rem > 7)) {
+                return 0;
+            }
+            if (neww < Integer.MIN_VALUE / 10 || (neww == Integer.MIN_VALUE / 10 && rem < -8)) {
+                return 0; 
+            }
+            neww = neww*10 + rem;
+            
         }
-        finalNum = finalNum/10;
-        if(finalNum > Integer.MAX_VALUE || finalNum<Integer.MIN_VALUE){
-            return 0;
-        }
-        if(x<0){
-            return (int)(-1*finalNum);
-        }
-        return (int)finalNum;
+        return neww;
+        
     }
 }
